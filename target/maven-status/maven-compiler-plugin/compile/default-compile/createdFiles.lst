@@ -4,6 +4,7 @@ com/grupob/herrera/service/ProductoService.class
 com/grupob/herrera/repository/ProveedorRepository.class
 com/grupob/herrera/model/Factura.class
 com/grupob/herrera/repository/FacturaRepository.class
+com/grupob/herrera/controller/HomeController.class
 com/grupob/herrera/model/Producto.class
 com/grupob/herrera/service/ProveedorService.class
 com/grupob/herrera/model/Factura$FacturaBuilder.class

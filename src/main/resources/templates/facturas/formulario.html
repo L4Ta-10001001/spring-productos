@@ -1,47 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <section>
-    <h2
-      th:text="${factura.id} != null ? 'Editar Factura' : 'Nueva Factura'"
-    ></h2>
+    <h2 th:text="${factura.id} != null ? 'Editar Factura' : 'Nueva Factura'"></h2>
+
     <form th:action="@{/facturas/guardar}" th:object="${factura}" method="post">
       <input type="hidden" th:field="*{id}" />
 
-      <label>Cédula:</label>
-      <input type="text" th:field="*{cedula}" maxlength="10" required /><br />
+      <div class="mb-3">
+        <label class="form-label">Cédula:</label>
+        <input type="text" th:field="*{cedula}" maxlength="10" class="form-control" required />
+      </div>
 
-      <label>Cliente:</label>
-      <input type="text" th:field="*{cliente}" maxlength="30" required /><br />
+      <div class="mb-3">
+        <label class="form-label">Cliente:</label>
+        <input type="text" th:field="*{cliente}" maxlength="30" class="form-control" required />
+      </div>
 
-      <label>Mes:</label>
-      <input type="text" th:field="*{mes}" maxlength="20" required /><br />
+      <div class="mb-3">
+        <label class="form-label">Mes:</label>
+        <input type="text" th:field="*{mes}" maxlength="20" class="form-control" required />
+      </div>
 
-      <label>Fecha:</label>
-      <input type="date" th:field="*{fechaFactura}" required /><br />
+      <div class="mb-3">
+        <label class="form-label">Fecha:</label>
+        <input type="date" th:field="*{fechaFactura}" class="form-control" required />
+      </div>
 
-      <label>Proveedor:</label>
-      <select th:field="*{proveedor.id}" required>
-        <option
-          th:each="p : ${proveedores}"
-          th:value="${p.id}"
-          th:text="${p.nombre}"
-        ></option></select
-      ><br />
+      <div class="mb-3">
+        <label class="form-label">Proveedor:</label>
+        <select th:field="*{proveedor.id}" class="form-select" required>
+          <option th:each="p : ${proveedores}" th:value="${p.id}" th:text="${p.nombre}"></option>
+        </select>
+      </div>
 
-      <label>Producto:</label>
-      <select th:field="*{producto.id}" required>
-        <option
-          th:each="p : ${productos}"
-          th:value="${p.id}"
-          th:text="${p.nombre}"
-        ></option></select
-      ><br />
+      <div class="mb-3">
+        <label class="form-label">Producto:</label>
+        <select th:field="*{producto.id}" class="form-select" required>
+          <option th:each="p : ${productos}" th:value="${p.id}" th:text="${p.nombre}"></option>
+        </select>
+      </div>
 
-      <label>Estado:</label>
-      <input type="text" th:field="*{estado}" maxlength="15" required /><br />
+      <div class="mb-3">
+        <label class="form-label">Estado:</label>
+        <input type="text" th:field="*{estado}" maxlength="15" class="form-control" required />
+      </div>
 
-      <button type="submit">Guardar</button>
-      <a th:href="@{/facturas}">Cancelar</a>
+      <button type="submit" class="btn btn-success">Guardar</button>
+      <a th:href="@{/facturas}" class="btn btn-secondary">Cancelar</a>
     </form>
   </section>
 </html>

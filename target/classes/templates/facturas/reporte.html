@@ -1,44 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <section>
     <h2>Reporte de Facturas</h2>
 
-    <form th:action="@{/facturas/reporte}" method="get">
-      <label>Proveedor:</label>
-      <select name="proveedorId" required>
-        <option
-          th:each="p : ${proveedores}"
-          th:value="${p.id}"
-          th:text="${p.nombre}"
-        ></option>
-      </select>
+    <form th:action="@{/facturas/reporte}" method="get" class="row g-3 mb-4">
+      <div class="col-md-5">
+        <label class="form-label">Proveedor:</label>
+        <select class="form-select" name="proveedorId" required>
+          <option th:each="p : ${proveedores}" th:value="${p.id}" th:text="${p.nombre}"></option>
+        </select>
+      </div>
 
-      <label>Producto:</label>
-      <select name="productoId" required>
-        <option
-          th:each="p : ${productos}"
-          th:value="${p.id}"
-          th:text="${p.nombre}"
-        ></option>
-      </select>
+      <div class="col-md-5">
+        <label class="form-label">Producto:</label>
+        <select class="form-select" name="productoId" required>
+          <option th:each="p : ${productos}" th:value="${p.id}" th:text="${p.nombre}"></option>
+        </select>
+      </div>
 
-      <button type="submit">Buscar</button>
+      <div class="col-md-2 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+      </div>
     </form>
 
     <h3>Resultados:</h3>
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>Cliente</th>
-        <th>Fecha</th>
-        <th>Estado</th>
-      </tr>
-      <tr th:each="f : ${resultados}">
-        <td th:text="${f.id}"></td>
-        <td th:text="${f.cliente}"></td>
-        <td th:text="${f.fechaFactura}"></td>
-        <td th:text="${f.estado}"></td>
-      </tr>
+    <table class="table table-striped table-bordered table-hover table-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Cédula</th>
+          <th>Cliente</th>
+          <th>Mes</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="f : ${resultados}">
+          <td th:text="${f.id}"></td>
+          <td th:text="${f.cedula}"></td>
+          <td th:text="${f.cliente}"></td>
+          <td th:text="${f.mes}"></td>
+          <td th:text="${f.fechaFactura}"></td>
+          <td th:text="${f.estado}"></td>
+        </tr>
+      </tbody>
     </table>
   </section>
 </html>

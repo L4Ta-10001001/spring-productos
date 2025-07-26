@@ -1,5 +1,6 @@
 /home/l4ta/Documents/universidad/marcos_desarrollo_I/recup_exam/herrera/src/main/java/com/grupob/herrera/ErikApplication.java
 /home/l4ta/Documents/universidad/marcos_desarrollo_I/recup_exam/herrera/src/main/java/com/grupob/herrera/controller/FacturaController.java
+/home/l4ta/Documents/universidad/marcos_desarrollo_I/recup_exam/herrera/src/main/java/com/grupob/herrera/controller/HomeController.java
 /home/l4ta/Documents/universidad/marcos_desarrollo_I/recup_exam/herrera/src/main/java/com/grupob/herrera/controller/ProductoController.java
 /home/l4ta/Documents/universidad/marcos_desarrollo_I/recup_exam/herrera/src/main/java/com/grupob/herrera/controller/ProveedorController.java
 /home/l4ta/Documents/universidad/marcos_desarrollo_I/recup_exam/herrera/src/main/java/com/grupob/herrera/model/Factura.java
