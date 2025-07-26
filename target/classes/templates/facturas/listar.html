@@ -1,8 +1,8 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: contenido}">
-  <div>
+<html xmlns:th="http://www.thymeleaf.org">
+  <section>
     <h2>Lista de Facturas</h2>
-    <a th:href="@{/facturas/nuevo}">Nueva Factura</a>
+    <a th:href="@{/facturas/nueva}">Nueva Factura</a>
     <table>
       <tr>
         <th>ID</th>
@@ -20,15 +20,15 @@
         <td th:text="${f.cedula}"></td>
         <td th:text="${f.cliente}"></td>
         <td th:text="${f.mes}"></td>
-        <td th:text="${f.fecha}"></td>
+        <td th:text="${f.fechaFactura}"></td>
         <td th:text="${f.proveedor.nombre}"></td>
         <td th:text="${f.producto.nombre}"></td>
         <td th:text="${f.estado}"></td>
         <td>
-          <a th:href="@{'/facturas/editar/' + ${f.id}}">Editar</a>
+          <a th:href="@{'/facturas/editar/' + ${f.id}}">Editar</a> |
           <a th:href="@{'/facturas/eliminar/' + ${f.id}}">Eliminar</a>
         </td>
       </tr>
     </table>
-  </div>
+  </section>
 </html>

@@ -1,7 +1,8 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: contenido">
-  <div>
+<html xmlns:th="http://www.thymeleaf.org">
+  <section>
     <h2>Reporte de Facturas</h2>
+
     <form th:action="@{/facturas/reporte}" method="get">
       <label>Proveedor:</label>
       <select name="proveedorId" required>
@@ -35,9 +36,9 @@
       <tr th:each="f : ${resultados}">
         <td th:text="${f.id}"></td>
         <td th:text="${f.cliente}"></td>
-        <td th:text="${f.fecha}"></td>
+        <td th:text="${f.fechaFactura}"></td>
         <td th:text="${f.estado}"></td>
       </tr>
     </table>
-  </div>
+  </section>
 </html>

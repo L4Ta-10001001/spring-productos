@@ -1,6 +1,6 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: contenido">
-  <div>
+<html xmlns:th="http://www.thymeleaf.org">
+  <section>
     <h2>Lista de Productos</h2>
     <a th:href="@{/productos/nuevo}">Nuevo Producto</a>
     <table>
@@ -13,10 +13,10 @@
         <td th:text="${p.id}"></td>
         <td th:text="${p.nombre}"></td>
         <td>
-          <a th:href="@{'/productos/editar/' + ${p.id}}">Editar</a>
+          <a th:href="@{'/productos/editar/' + ${p.id}}">Editar</a> |
           <a th:href="@{'/productos/eliminar/' + ${p.id}}">Eliminar</a>
         </td>
       </tr>
     </table>
-  </div>
+  </section>
 </html>
