@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:14
+    container_name: registro_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: registro_db
+      POSTGRES_USER: erik
+      POSTGRES_PASSWORD: erik123
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:

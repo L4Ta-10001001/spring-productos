@@ -1,0 +1,16 @@
+com/grupob/herrera/repository/ProductoRepository.class
+com/grupob/herrera/model/Proveedor$ProveedorBuilder.class
+com/grupob/herrera/service/ProductoService.class
+com/grupob/herrera/repository/ProveedorRepository.class
+com/grupob/herrera/model/Factura.class
+com/grupob/herrera/repository/FacturaRepository.class
+com/grupob/herrera/model/Producto.class
+com/grupob/herrera/service/ProveedorService.class
+com/grupob/herrera/model/Factura$FacturaBuilder.class
+com/grupob/herrera/controller/ProductoController.class
+com/grupob/herrera/service/FacturaService.class
+com/grupob/herrera/ErikApplication.class
+com/grupob/herrera/model/Producto$ProductoBuilder.class
+com/grupob/herrera/controller/FacturaController.class
+com/grupob/herrera/model/Proveedor.class
+com/grupob/herrera/controller/ProveedorController.class

@@ -1,0 +1,18 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: contenido">
+  <div>
+    <h2
+      th:text="${producto.id} != null ? 'Editar Producto' : 'Nuevo Producto'"
+    ></h2>
+    <form
+      th:action="@{/productos/guardar}"
+      th:object="${producto}"
+      method="post"
+    >
+      <input type="hidden" th:field="*{id}" />
+      <label>Nombre:</label>
+      <input type="text" th:field="*{nombre}" required />
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
+</html>

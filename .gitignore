@@ -1,0 +1,82 @@
+################################################################################
+# Proyecto Spring Boot + Maven + Docker + VS Code
+# Este archivo evita subir binarios, configuraciones locales y archivos sensibles
+################################################################################
+
+# ---------------------
+# Documentación auxiliar
+# ---------------------
+HELP.md
+
+# ---------------------
+# Maven
+# ---------------------
+/target/                      # Carpeta de compilación
+.mvn/wrapper/maven-wrapper.jar # Binario del wrapper Maven
+!.mvn/wrapper/maven-wrapper.properties # Mantener propiedades del wrapper
+pom.xml                       # NO lo ignores (es esencial)
+
+# ---------------------
+# IDEs - Eclipse / Spring Tools Suite
+# ---------------------
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated
+.springBeans
+.sts4-cache
+
+# ---------------------
+# IntelliJ IDEA
+# ---------------------
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# ---------------------
+# NetBeans
+# ---------------------
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+# ---------------------
+# VS Code
+# ---------------------
+.vscode/
+
+# ---------------------
+# Docker
+# ---------------------
+# NO ignores docker-compose.yml ni Dockerfile
+# docker-compose.yml
+# Dockerfile
+
+# ---------------------
+# Scripts de base de datos
+# ---------------------
+# NO ignores script_db/
+!script_db/**
+
+# ---------------------
+# Archivos de entorno (credenciales, secretos)
+# ---------------------
+*.env
+
+# ---------------------
+# Logs y archivos temporales
+# ---------------------
+*.log
+*.tmp
+
+# ---------------------
+# Archivos del sistema
+# ---------------------
+.DS_Store
+Thumbs.db
+

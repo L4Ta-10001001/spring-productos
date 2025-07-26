@@ -1,0 +1,26 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registro DB - [[${title}]]</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  </head>
+  <body>
+    <header>
+      <h1>Registro de Facturas</h1>
+      <nav>
+        <a th:href="@{/proveedores}">Proveedores</a> |
+        <a th:href="@{/productos}">Productos</a> |
+        <a th:href="@{/facturas}">Facturas</a>
+      </nav>
+    </header>
+
+    <main>
+      <div th:replace="~{::section}"></div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 GrupoB - Erik Herrera</p>
+    </footer>
+  </body>
+</html>
