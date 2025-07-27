@@ -1,3 +1,5 @@
+let idEditarFactura = null;
+
 function cargarFacturas() {
   fetch("/api/facturas")
     .then((response) => response.json())
@@ -16,7 +18,8 @@ function cargarFacturas() {
           <td>${f.producto ? f.producto.nombre : ""}</td>
           <td>${f.estado}</td>
           <td>
-            <button onclick="eliminarFactura(${f.id})">Eliminar</button>
+            <button class="btn btn-warning btn-sm me-2" onclick="editarFactura(${f.id})">Editar</button>
+            <button class="btn btn-danger btn-sm" onclick="eliminarFactura(${f.id})">Eliminar</button>
           </td>`;
         tbody.appendChild(row);
       });
@@ -63,7 +66,7 @@ function guardarFactura() {
   const estado = document.getElementById("estado").value;
 
   if (!cedula || !cliente || !mes || !fechaFactura || !estado) {
-    alert("Todos los campos son obligatorios.");
+    mostrarAlerta("Todos los campos son obligatorios.", "danger");
     return;
   }
 
@@ -77,16 +80,45 @@ function guardarFactura() {
     producto: { id: productoId },
   };
 
-  fetch("/api/facturas", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(factura),
-  }).then(() => {
-    alert("Factura guardada.");
-    cargarFacturas();
-  });
+  if (idEditarFactura) {
+    fetch(`/api/facturas/${idEditarFactura}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(factura),
+    }).then(() => {
+      mostrarAlerta("Factura actualizada correctamente.", "success");
+      idEditarFactura = null;
+      limpiarFormularioFactura();
+      cargarFacturas();
+    });
+  } else {
+    fetch("/api/facturas", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(factura),
+    }).then(() => {
+      mostrarAlerta("Factura guardada correctamente.", "success");
+      limpiarFormularioFactura();
+      cargarFacturas();
+    });
+  }
+}
+
+function editarFactura(id) {
+  fetch(`/api/facturas/${id}`)
+    .then((response) => response.json())
+    .then((f) => {
+      idEditarFactura = f.id;
+      document.getElementById("cedula").value = f.cedula;
+      document.getElementById("cliente").value = f.cliente;
+      document.getElementById("mes").value = f.mes;
+      document.getElementById("fechaFactura").value = f.fechaFactura;
+      document.getElementById("selectProveedor").value = f.proveedor.id;
+      document.getElementById("selectProducto").value = f.producto.id;
+      document.getElementById("estado").value = f.estado;
+
+      mostrarAlerta(`Editando factura ID ${id}`, "info");
+    });
 }
 
 function eliminarFactura(id) {
@@ -95,7 +127,7 @@ function eliminarFactura(id) {
   fetch(`/api/facturas/${id}`, {
     method: "DELETE",
   }).then(() => {
-    alert("Factura eliminada.");
+    mostrarAlerta("Factura eliminada.", "success");
     cargarFacturas();
   });
 }
@@ -123,17 +155,37 @@ function buscarFacturas() {
           <td>${f.producto ? f.producto.nombre : ""}</td>
           <td>${f.estado}</td>
           <td>
-            <button onclick="eliminarFactura(${f.id})">Eliminar</button>
+            <button class="btn btn-warning btn-sm me-2" onclick="editarFactura(${f.id})">Editar</button>
+            <button class="btn btn-danger btn-sm" onclick="eliminarFactura(${f.id})">Eliminar</button>
           </td>`;
         tbody.appendChild(row);
       });
     });
 }
 
-// Inicializar combos cuando se cargue la página de facturas
+function limpiarFormularioFactura() {
+  document.getElementById("cedula").value = "";
+  document.getElementById("cliente").value = "";
+  document.getElementById("mes").value = "";
+  document.getElementById("fechaFactura").value = "";
+  document.getElementById("selectProveedor").value = "";
+  document.getElementById("selectProducto").value = "";
+  document.getElementById("estado").value = "";
+}
+
+function mostrarAlerta(msg, tipo = "success") {
+  const alerta = document.getElementById("alerta");
+  alerta.className = `alert alert-${tipo}`;
+  alerta.innerText = msg;
+  alerta.classList.remove("d-none");
+  setTimeout(() => alerta.classList.add("d-none"), 4000);
+}
+
+// Inicializar combos y facturas al cargar la página
 window.onload = () => {
   cargarProveedoresSelect("selectProveedor");
   cargarProductosSelect("selectProducto");
   cargarProveedoresSelect("buscarProveedor");
   cargarProductosSelect("buscarProducto");
+  cargarFacturas();
 };

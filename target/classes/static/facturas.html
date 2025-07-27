@@ -14,7 +14,6 @@
           <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
           <li class="nav-item"><a class="nav-link" href="proveedores.html">Proveedores</a></li>
           <li class="nav-item"><a class="nav-link" href="facturas.html">Facturas</a></li>
-          <a href="index.html" class="btn btn-secondary mt-4">Volver al Inicio</a>
         </ul>
       </div>
     </div>
@@ -23,12 +22,15 @@
   <div class="container">
     <h1 class="mb-4">Facturas</h1>
 
+    <!-- Alertas Bootstrap -->
     <div id="alerta" class="alert d-none"></div>
 
+    <!-- Botón cargar -->
     <div class="mb-3">
       <button class="btn btn-success" onclick="cargarFacturas()">Cargar Facturas</button>
     </div>
 
+    <!-- Tabla de facturas -->
     <table class="table table-bordered table-striped">
       <thead class="table-primary">
         <tr>
@@ -39,8 +41,9 @@
       <tbody id="tabla-facturas"></tbody>
     </table>
 
+    <!-- Formulario agregar/editar -->
     <div class="card mt-5">
-      <div class="card-header">Agregar Factura</div>
+      <div class="card-header">Agregar / Editar Factura</div>
       <div class="card-body">
         <div class="mb-3">
           <input type="text" id="cedula" class="form-control" placeholder="Cédula">
@@ -69,6 +72,7 @@
       </div>
     </div>
 
+    <!-- Buscar -->
     <div class="card mt-5">
       <div class="card-header">Buscar Facturas</div>
       <div class="card-body">
@@ -83,6 +87,12 @@
         <button class="btn btn-secondary" onclick="buscarFacturas()">Buscar</button>
       </div>
     </div>
+
+    <!-- Botón volver -->
+    <div class="mt-4">
+      <a href="index.html" class="btn btn-secondary">Volver al Inicio</a>
+    </div>
+
   </div>
 
   <script src="js/facturas.js"></script>

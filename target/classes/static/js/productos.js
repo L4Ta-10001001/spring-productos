@@ -1,3 +1,5 @@
+let idEditar = null;
+
 function cargarProductos() {
   fetch('/api/productos')
     .then(response => response.json())
@@ -10,6 +12,7 @@ function cargarProductos() {
           <td>${p.id}</td>
           <td>${p.nombre}</td>
           <td>
+            <button class="btn btn-warning btn-sm me-2" onclick="editarProducto(${p.id}, '${p.nombre}')">Editar</button>
             <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${p.id})">Eliminar</button>
           </td>`;
         tbody.appendChild(row);
@@ -25,18 +28,38 @@ function guardarProducto() {
     return;
   }
 
-  fetch('/api/productos', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ nombre: nombre })
-  })
-  .then(() => {
-    mostrarAlerta('Producto guardado correctamente.', 'success');
-    document.getElementById('nombreProducto').value = '';
-    cargarProductos();
-  });
+  const producto = { nombre: nombre };
+
+  if (idEditar) {
+    fetch(`/api/productos/${idEditar}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(producto)
+    })
+    .then(() => {
+      mostrarAlerta('Producto actualizado correctamente.', 'success');
+      idEditar = null;
+      document.getElementById('nombreProducto').value = '';
+      cargarProductos();
+    });
+  } else {
+    fetch('/api/productos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(producto)
+    })
+    .then(() => {
+      mostrarAlerta('Producto guardado correctamente.', 'success');
+      document.getElementById('nombreProducto').value = '';
+      cargarProductos();
+    });
+  }
+}
+
+function editarProducto(id, nombre) {
+  idEditar = id;
+  document.getElementById('nombreProducto').value = nombre;
+  mostrarAlerta(`Editando producto ID ${id}`, 'info');
 }
 
 function eliminarProducto(id) {
@@ -65,3 +88,6 @@ function mostrarAlerta(msg, tipo = 'success') {
   alerta.classList.remove('d-none');
   setTimeout(() => alerta.classList.add('d-none'), 4000);
 }
+
+// Cargar productos al iniciar
+document.addEventListener('DOMContentLoaded', cargarProductos);

@@ -1,3 +1,5 @@
+let idEditarProveedor = null;
+
 function cargarProveedores() {
   fetch("/api/proveedores")
     .then((response) => response.json())
@@ -10,7 +12,8 @@ function cargarProveedores() {
           <td>${p.id}</td>
           <td>${p.nombre}</td>
           <td>
-            <button onclick="eliminarProveedor(${p.id})">Eliminar</button>
+            <button class="btn btn-warning btn-sm me-2" onclick="editarProveedor(${p.id}, '${p.nombre}')">Editar</button>
+            <button class="btn btn-danger btn-sm" onclick="eliminarProveedor(${p.id})">Eliminar</button>
           </td>`;
         tbody.appendChild(row);
       });
@@ -21,21 +24,40 @@ function guardarProveedor() {
   const nombre = document.getElementById("nombreProveedor").value;
 
   if (!nombre.trim()) {
-    alert("El nombre es obligatorio.");
+    mostrarAlerta("El nombre es obligatorio.", "danger");
     return;
   }
 
-  fetch("/api/proveedores", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ nombre: nombre }),
-  }).then(() => {
-    alert("Proveedor guardado.");
-    document.getElementById("nombreProveedor").value = "";
-    cargarProveedores();
-  });
+  const proveedor = { nombre: nombre };
+
+  if (idEditarProveedor) {
+    fetch(`/api/proveedores/${idEditarProveedor}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(proveedor),
+    }).then(() => {
+      mostrarAlerta("Proveedor actualizado correctamente.", "success");
+      idEditarProveedor = null;
+      document.getElementById("nombreProveedor").value = "";
+      cargarProveedores();
+    });
+  } else {
+    fetch("/api/proveedores", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(proveedor),
+    }).then(() => {
+      mostrarAlerta("Proveedor guardado correctamente.", "success");
+      document.getElementById("nombreProveedor").value = "";
+      cargarProveedores();
+    });
+  }
+}
+
+function editarProveedor(id, nombre) {
+  idEditarProveedor = id;
+  document.getElementById("nombreProveedor").value = nombre;
+  mostrarAlerta(`Editando proveedor ID ${id}`, "info");
 }
 
 function eliminarProveedor(id) {
@@ -55,3 +77,13 @@ function eliminarProveedor(id) {
     }
   });
 }
+
+function mostrarAlerta(msg, tipo = "success") {
+  const alerta = document.getElementById("alerta");
+  alerta.className = `alert alert-${tipo}`;
+  alerta.innerText = msg;
+  alerta.classList.remove("d-none");
+  setTimeout(() => alerta.classList.add("d-none"), 4000);
+}
+
+document.addEventListener("DOMContentLoaded", cargarProveedores);
