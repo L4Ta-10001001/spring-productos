@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +38,13 @@ public class ProductoRestController {
   @GetMapping("/{id}")
   public Producto obtenerPorId(@PathVariable Integer id) {
     return productoService.obtenerPorId(id).orElseThrow();
+  }
+
+  @PutMapping("/{id}")
+  public Producto actualizar(@PathVariable Integer id, @RequestBody Producto producto) {
+    Producto existente = productoService.obtenerPorId(id).orElseThrow();
+    producto.setId(id);
+    return productoService.guardar(producto);
   }
 
   @DeleteMapping("/{id}")
