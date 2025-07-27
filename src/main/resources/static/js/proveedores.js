@@ -39,12 +39,19 @@ function guardarProveedor() {
 }
 
 function eliminarProveedor(id) {
-  if (!confirm("¿Está seguro de eliminar este proveedor?")) return;
+  if (!confirm('¿Está seguro de eliminar este proveedor?')) return;
 
   fetch(`/api/proveedores/${id}`, {
-    method: "DELETE",
-  }).then(() => {
-    alert("Proveedor eliminado.");
-    cargarProveedores();
+    method: 'DELETE'
+  })
+  .then(response => {
+    if (response.ok) {
+      mostrarAlerta('Proveedor eliminado correctamente.', 'success');
+      cargarProveedores();
+    } else if (response.status === 409) {
+      response.text().then(msg => mostrarAlerta(msg, 'danger'));
+    } else {
+      mostrarAlerta('Error inesperado al eliminar.', 'danger');
+    }
   });
 }
